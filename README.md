@@ -7,3 +7,4 @@ Spring Boot  + Spring Security
 4. [SpringBoot + SpringSecurity 短信验证码登录功能](https://blog.csdn.net/u013435893/article/details/79684027)      
 5. [SpringBoot + SpringSecurity OAuth2.0 简单使用](https://blog.csdn.net/u013435893/article/details/79735097)    
 6. [SpringBoot + SpringSecurity 控制授权](https://blog.csdn.net/u013435893/article/details/79770052) 
+测试是否迁移成功
