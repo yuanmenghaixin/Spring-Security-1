@@ -41,6 +41,19 @@ public class IndexController {
         return "查询用户";
     }
 
+    @ResponseBody
+    @RequestMapping("/successAbcLogin")
+    public String successAbcLogin() {
+        return "登录成功跳转";
+    }
+
+    @ResponseBody
+    @RequestMapping("/showMemberNo")
+    public String showMemberNo() {
+        return "查询用户No";
+    }
+
+
 
     @RequestMapping("/login")
     public String login() {

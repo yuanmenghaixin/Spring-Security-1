@@ -1,8 +1,5 @@
 package com.mayikt.entity;
 
-import lombok.Data;
-
-@Data
 public class PermissionEntity {
 	private Integer id;
 	// 权限名称

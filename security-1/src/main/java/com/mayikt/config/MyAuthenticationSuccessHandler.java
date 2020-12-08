@@ -19,6 +19,7 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest,
                                         HttpServletResponse resp, Authentication authentication) throws IOException, ServletException {
+        System.out.println("用户认证成功调用 MyAuthenticationSuccessHandler.onAuthenticationSuccess 方法");
         resp.sendRedirect("/");
     }
 }

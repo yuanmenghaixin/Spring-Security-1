@@ -25,6 +25,7 @@ public class MyAuthenticationFailureHandler implements AuthenticationFailureHand
      */
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, org.springframework.security.core.AuthenticationException e) throws IOException, ServletException {
+        System.out.println("登陆失败调用 MyAuthenticationFailureHandler.onAuthenticationFailure 方法");
         httpServletResponse.sendRedirect("http://www.mayikt.com");
     }
 }

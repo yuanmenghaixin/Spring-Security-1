@@ -11,8 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  **/
 @MapperScan("com.mayikt.mapper")
 @SpringBootApplication
-public class AppSecurity {
+public class AppSpringSecurity {
     public static void main(String[] args) {
-        SpringApplication.run(AppSecurity.class);
+        SpringApplication.run(AppSpringSecurity.class);
     }
 }

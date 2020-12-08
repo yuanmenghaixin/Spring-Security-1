@@ -8,10 +8,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Data;
 
 // 用户信息表
-@Data
 public class UserEntity implements UserDetails {
 
 	private Integer id;

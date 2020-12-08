@@ -61,6 +61,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 配置HttpSecurity 拦截资源
+     * denyAll	永远返回false
+     * anonymous	当前用户是anonymous时返回true
+     * rememberMe	当前用户是rememberMe用户时返回true
+     * authenticated	当前用户不是anonymous时返回true
+     * fullAuthenticated	当前用户既不是anonymous也不是rememberMe用户时返回true
+     * hasRole（role）	用户拥有指定的角色权限时返回true
+     * hasAnyRole（[role1，role2]）	用户拥有任意一个指定的角色权限时返回true
+     * hasAuthority（authority）	用户拥有指定的权限时返回true
+     * hasAnyAuthority（[authority1,authority2]）	用户拥有任意一个指定的权限时返回true
+     * hasIpAddress（'192.168.1.0'）	请求发送的Ip匹配时返回true
      *
      * @param http
      * @throws Exception
@@ -79,14 +89,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/updateMember").hasAnyAuthority("updateMember")
 //                .antMatchers("/showMember").hasAnyAuthority("showMember").antMatchers("/**")
 //                .fullyAuthenticated().and().formLogin().loginPage("/login").and().csrf().disable();
-        ExpressionUrlAuthorizationConfigurer <HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http
-                .authorizeRequests();
+        // TODO authorizeRequests()配置路径拦截，表明路径访问所对应的权限，角色，认证信息。
+        ExpressionUrlAuthorizationConfigurer <HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http.authorizeRequests();
         List <PermissionEntity> allPermission = permissionMapper.findAllPermission();
         allPermission.forEach((a) -> {
-            authorizeRequests.antMatchers(a.getUrl()).hasAnyAuthority(a.getPermTag());
+            authorizeRequests.antMatchers(a.getUrl()).hasAnyAuthority(a.getPermTag());//TODO hasAnyAuthority和hasAnyRole两者二选一 一个有前缀ROLE_一个无前缀ROLE_
+            //authorizeRequests.antMatchers(a.getUrl()).hasAnyRole(a.getPermTag());//TODO hasAnyAuthority和hasAnyRole两者二选一 hasAuthority 方法时，如果数据是从数据库中查询出来的，这里的权限和数据库中保存一致即可，可以不加 ROLE_ 前缀。即数据库中存储的用户角色如果是 admin，这里就是 admin。
         });
-        authorizeRequests.antMatchers("/login").permitAll().antMatchers("/**").fullyAuthenticated().and().formLogin()
+        authorizeRequests.antMatchers("/login").permitAll()
+                .antMatchers("/**").fullyAuthenticated()//TODO 以上权限意外的请求只要认证成功即可访问
+                .and().formLogin()// TODO formLogin()对应表单认证相关的配置并指定登录界面
                 .loginPage("/login").and().csrf().disable();
+        //TODO 通用配置
+      /*  http.authorizeRequests()// TODO authorizeRequests()配置路径拦截，表明路径访问所对应的权限，角色，认证信息。
+                .antMatchers("/resources/**", "/signup", "/about").permitAll() // TODO permitAll()放行权限
+                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+                .anyRequest().authenticated()
+           .and().formLogin()// TODO formLogin()对应表单认证相关的配置
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .failureForwardUrl("/login?error")
+                .loginPage("/login")
+                .permitAll()
+                //.successHandler(new MyAuthenticationSuccessHandler()) //TODO 当前使用注解方式
+                //.failureHandler(new MyAuthenticationFailureHandler()) //TODO 当前使用注解方式
+            .and().logout()// TODO logout()对应了注销相关的配置
+                 .deleteCookies("remove")
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/index")
+                .permitAll()
+            .and().httpBasic()// TODO httpBasic()可以配置basic登录
+                .disable();*/
 
     }
 
