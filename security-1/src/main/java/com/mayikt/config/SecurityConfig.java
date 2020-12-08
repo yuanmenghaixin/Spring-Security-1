@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public boolean matches(CharSequence charSequence, String s) {
                 String rawPass = MD5Util.encode((String) charSequence);
-                System.out.println(rawPass+",,"+s);
+                System.out.println(rawPass + ",," + s);
                 boolean result = rawPass.equals(s);
                 return result;
             }
@@ -79,9 +79,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/updateMember").hasAnyAuthority("updateMember")
 //                .antMatchers("/showMember").hasAnyAuthority("showMember").antMatchers("/**")
 //                .fullyAuthenticated().and().formLogin().loginPage("/login").and().csrf().disable();
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http
+        ExpressionUrlAuthorizationConfigurer <HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http
                 .authorizeRequests();
-        List<PermissionEntity> allPermission = permissionMapper.findAllPermission();
+        List <PermissionEntity> allPermission = permissionMapper.findAllPermission();
         allPermission.forEach((a) -> {
             authorizeRequests.antMatchers(a.getUrl()).hasAnyAuthority(a.getPermTag());
         });

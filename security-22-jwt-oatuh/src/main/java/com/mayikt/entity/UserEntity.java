@@ -27,10 +27,14 @@ public class UserEntity implements UserDetails {
 	// 用户所有权限
 	private List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
-	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 
 		return authorities;
+	}
+
+
+	public void setAuthorities(List<GrantedAuthority> authorities) {
+		this.authorities = authorities;
 	}
 
 	public Integer getId() {
@@ -117,9 +121,5 @@ public class UserEntity implements UserDetails {
 
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	public void setAuthorities(List <GrantedAuthority> authorities) {
-		this.authorities = authorities;
 	}
 }

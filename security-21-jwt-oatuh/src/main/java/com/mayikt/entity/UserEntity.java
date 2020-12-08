@@ -33,6 +33,11 @@ public class UserEntity implements UserDetails {
 		return authorities;
 	}
 
+
+	public void setAuthorities(List<GrantedAuthority> authorities) {
+		this.authorities = authorities;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -117,9 +122,5 @@ public class UserEntity implements UserDetails {
 
 	public void setCredentialsNonExpired(boolean credentialsNonExpired) {
 		this.credentialsNonExpired = credentialsNonExpired;
-	}
-
-	public void setAuthorities(List <GrantedAuthority> authorities) {
-		this.authorities = authorities;
 	}
 }
